@@ -45,3 +45,5 @@ It allows users to send emails asynchronously and log the current server time vi
 - **Ngrok**: Optional tool for exposing local server to the internet.  
 - **Logging**: Tracks all task executions and errors.  
 ---
+
+<img width="1166" height="224" alt="image" src="https://github.com/user-attachments/assets/3f03b6f3-5031-41ae-a7de-bdf3db8bb940" />
