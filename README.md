@@ -46,4 +46,32 @@ It allows users to send emails asynchronously and log the current server time vi
 - **Logging**: Tracks all task executions and errors.  
 ---
 
+## Start RabbitMQ broker
+```
+sudo service rabbitmq-server start
+```
+
+## start the celery work
+```
+celery -A app.celery worker --loglevel=info
+```
+
+## Run FastAPI app
+```
+uvicorn app:app --host 127.0.0.1 --port 5000 --reload
+```
+
+## Configure the nginx and start nginx
+```
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+## Expose public endpoint via ngrok
+```
+Expose public endpoint via ngrok
+```
+
+
+## The image of the output from the FastAPI
 <img width="1166" height="224" alt="image" src="https://github.com/user-attachments/assets/3f03b6f3-5031-41ae-a7de-bdf3db8bb940" />
