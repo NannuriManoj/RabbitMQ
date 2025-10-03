@@ -34,6 +34,7 @@ def send_email_task(to_email: str):
         logging.error(f"Failed to send email to {to_email}: {str(e)}")
 
 
+# Root route
 @app.get("/")
 async def index(sendmail: str = Query(None), talktome: str = Query(None)):
     if sendmail:
@@ -49,6 +50,23 @@ async def index(sendmail: str = Query(None), talktome: str = Query(None)):
     return {"message": "No action specified."}
 
 
+# /message route (same behavior as /)
+@app.get("/message")
+async def message_route(sendmail: str = Query(None), talktome: str = Query(None)):
+    if sendmail:
+        try:
+            send_email_task.delay(sendmail)
+            return {"message": f"Email sending task queued for {sendmail}"}
+        except Exception as e:
+            logging.error(f"Failed to queue email for {sendmail}: {str(e)}")
+            raise HTTPException(status_code=500, detail="Failed to queue email task.")
+    elif talktome:
+        logging.info(f"Current time logged: {datetime.now()}")
+        return {"message": "Current time logged."}
+    return {"message": "No action specified."}
+
+
+# Logs route
 @app.get("/logs", response_class=PlainTextResponse)
 async def get_logs():
     try:
